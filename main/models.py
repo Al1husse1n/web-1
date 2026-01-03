@@ -11,11 +11,11 @@ class Score(models.Model):
     date = models.DateTimeField(default=timezone.now)
     correct_words = models.IntegerField()
     incorrect_words = models.IntegerField()
+    time = models.IntegerField()
     user = models.ForeignKey('User', on_delete=models.CASCADE, related_name="scores")
 
-class Leaderboard(models.Model):
-    user = models.ForeignKey('User', on_delete=models.CASCADE, related_name="ranks")
-    rank = models.IntegerField()
+    class Meta:
+        ordering = ['wpm', 'accuracy']
     
 
 

@@ -1,0 +1,20 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #323437;
+} 
+
+.table{
+    display: grid;
+    color:white;
+    margin:20%;
+    margin-left: 5%;
+    margin-top: 50%;
+    height: 20vh;
+    width:100vw;
+    color:#c8c7bd;
+}

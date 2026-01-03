@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'main/leaderboards.css' %}">
+    <title>leaderboards</title>
+</head>
+<body>
+    <div class="nav">
+
+    </div>
+    <div class="table" border="1" cellpadding="100">
+        <table>
+            <tr>
+                <th>#</th>
+                <th>name</th>
+                <th>wpm</th>
+                <th>accuracy</th>
+                <th>date</th>
+            </tr>
+            <tr>
+                <td>1.</td>
+                <td>Ali</td>
+                <td>50</td>
+                <td>98%</td>
+                <td>21 Aug 2025</td>
+            </tr>
+            <tr>
+                <td>2.</td>
+                <td>Yafet</td>
+                <td>51</td>
+                <td>98%</td>
+                <td>12 Sep 2022</td>
+            </tr>
+        </table>
+    </div>
+    <script src="{% static 'main/leaderboards.js' %}"></script>
+</body>
+</html>

@@ -5,12 +5,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'main/leaderboards.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+
     <title>leaderboards</title>
 </head>
 <body>
     <div class="nav">
-
+        <a href="#">
+            <span class="material-symbols-outlined" id="logo">
+            keyboard_full
+            </span>
+        </a>
+        <a href="#" title="start test">
+            <span class="material-symbols-outlined" id="keyboard-icon">
+            keyboard
+            </span>
+        </a>
+        <a href="#" title="leaderboards">
+            <span class="material-symbols-outlined">
+            crown
+            </span>
+        </a>
+        <a href="#" title="about us">
+            <span class="material-symbols-outlined">
+            info_i
+            </span>
+        </a>
+        <a href="#" title="profile">
+            <span class="material-symbols-outlined">
+            account_box
+            </span>
+        </a>
+        <a href="#" title="logout">
+            <span class="material-symbols-outlined">
+            logout
+        </span>
+        </a>
     </div>
+    <div class="filter-time">
+        <div id="filter-header">filter by time</div>
+        <div class="time-all"><a href="#">all</a></div>
+        <div class="time-15"><a href="#">15s</a></div>
+        <div class="time-30"><a href="#">30s</a></div>
+        <div class="time-60"><a href="#">60s</a></div>
+    </div>
+    <h1 class="header">HiLCoE Leaderboards</h1>
     <div class="table" border="1" cellpadding="100">
         <table>
             <tr>
@@ -19,20 +58,23 @@
                 <th>wpm</th>
                 <th>accuracy</th>
                 <th>date</th>
+                <th>time</th>
             </tr>
             <tr>
                 <td>1.</td>
-                <td>Ali</td>
+                <td>Abebe</td>
                 <td>50</td>
                 <td>98%</td>
-                <td>21 Aug 2025</td>
+                <td>21-11-2025</td>
+                <td>15s</td>
             </tr>
             <tr>
                 <td>2.</td>
-                <td>Yafet</td>
+                <td>Kebede</td>
                 <td>51</td>
                 <td>98%</td>
-                <td>12 Sep 2022</td>
+                <td>12-01-2022</td>
+                <td>30s</td>
             </tr>
         </table>
     </div>

@@ -50,7 +50,7 @@
         <div class="time-60"><a href="#">60s</a></div>
     </div>
     <h1 class="header">HiLCoE Leaderboards</h1>
-    <div class="table" border="1" cellpadding="100">
+    <div class="table" border="1" >
         <table>
             <tr>
                 <th>#</th>
@@ -60,22 +60,16 @@
                 <th>date</th>
                 <th>time</th>
             </tr>
+            {% for score in scores %}
             <tr>
-                <td>1.</td>
-                <td>Abebe</td>
-                <td>50</td>
-                <td>98%</td>
-                <td>21-11-2025</td>
-                <td>15s</td>
+                <td>{{ forloop.counter }}.</td>
+                <td>{{score.user.username}}</td>
+                <td>{{score.wpm}}</td>
+                <td>{{score.accuracy|floatformat:0}}%</td>
+                <td>{{score.date|date:"m-d-Y"}}</td>
+                <td>{{score.time}}s</td>
             </tr>
-            <tr>
-                <td>2.</td>
-                <td>Kebede</td>
-                <td>51</td>
-                <td>98%</td>
-                <td>12-01-2022</td>
-                <td>30s</td>
-            </tr>
+            {% endfor %}
         </table>
     </div>
     <script src="{% static 'main/leaderboards.js' %}"></script>

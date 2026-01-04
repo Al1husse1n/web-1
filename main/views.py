@@ -1,7 +1,8 @@
 from django.shortcuts import render
-
+from .models import *
 def leaderboards(request):
-    return render(request, 'main/leaderboards.html')
+    scores = Score.objects.all()
+    return render(request, 'main/leaderboards.html',{"scores":scores})
 
 def home(request):
     pass

@@ -15,7 +15,7 @@ class Score(models.Model):
     user = models.ForeignKey('User', on_delete=models.CASCADE, related_name="scores")
 
     class Meta:
-        ordering = ['wpm', 'accuracy']
+        ordering = ['-wpm', '-accuracy']
     
 
 

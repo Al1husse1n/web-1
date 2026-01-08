@@ -44,24 +44,24 @@
     </div>
     <div class="filter-time">
         <div id="filter-header">filter by time</div>
-        <div class="time-all"><a href="#">all</a></div>
-        <div class="time-15"><a href="#">15s</a></div>
-        <div class="time-30"><a href="#">30s</a></div>
-        <div class="time-60"><a href="#">60s</a></div>
+        <div><a href="?time=all" class="time-link">all</a></div>
+        <div ><a href="?time=15" class="time-link">15s</a></div>
+        <div ><a href="?time=30" class="time-link">30s</a></div>
+        <div ><a href="?time=60" class="time-link">60s</a></div>
     </div>
     <h1 class="header">HiLCoE Leaderboards</h1>
-    <div class="table" border="1" >
+    <div class="table" border="1">
         <table>
-            <tr>
-                <th>#</th>
-                <th>name</th>
-                <th>wpm</th>
-                <th>accuracy</th>
-                <th>date</th>
-                <th>time</th>
+            <tr class="table-header">
+                <td>#</td>
+                <td>name</td>
+                <td>wpm</td>
+                <td>accuracy</td>
+                <td>date</td>
+                <td>time</td>
             </tr>
             {% for score in scores %}
-            <tr>
+            <tr id="table-data">
                 <td>{{ forloop.counter }}.</td>
                 <td>{{score.user.username}}</td>
                 <td>{{score.wpm}}</td>
@@ -75,3 +75,4 @@
     <script src="{% static 'main/leaderboards.js' %}"></script>
 </body>
 </html>
+

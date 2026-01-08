@@ -14,8 +14,9 @@ def leaderboards(request):
 
 def home(request):
     pass
+
 def login(request):
-    pass
+    return render(request, 'main/login.html')
 def sign_up(request):
     pass
 def profile(request):

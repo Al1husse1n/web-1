@@ -11,8 +11,6 @@
 <body>
 
 <div class="auth-container">
-
-    <!-- REGISTER -->
     <div class="auth-box">
         <h2>
             <span class="material-symbols-outlined">person_add</span>
@@ -20,31 +18,31 @@
         </h2>
 
         <div class="field">
-            <input type="text" placeholder="username">
+            <input type="text" placeholder="username" id="singUp-user">
             <p class="error">invalid username</p>
         </div>
 
         <div class="field">
-            <input type="email" placeholder="email">
+            <input type="email" placeholder="email" id="signUp-email">
         </div>
 
         <div class="field">
-            <input type="password" placeholder="password">
+            <input type="password" placeholder="password" id="signUp-pass-1">
             <p class="error">invalid password</p>
         </div>
 
         <div class="field">
-            <input type="password" placeholder="verify password">
+            <input type="password" placeholder="verify password" id="signUp-pass-2">
             <p class="error">passwords do not match</p>
         </div>
 
-        <button class="primary-btn">
+        <button class="primary-btn" id="signUp-btn">
             <span class="material-symbols-outlined">person_add</span>
             sign up
         </button>
     </div>
 
-    <!-- LOGIN -->
+    
     <div class="auth-box">
         <h2>
             <span class="material-symbols-outlined">login</span>
@@ -52,15 +50,15 @@
         </h2>
 
         <div class="field">
-            <input type="email" placeholder="email">
-            <p class="error">user not found</p>
+            <input type="text" placeholder="username" id="signIn-user">
         </div>
 
         <div class="field">
-            <input type="password" placeholder="password">
+            <input type="password" placeholder="password" id="signIn-pass">
+            <p class="error" id="signIn-error">Invalid credentials</p>
         </div>
 
-        <button class="primary-btn">
+        <button class="primary-btn" id="signIn-btn">
             <span class="material-symbols-outlined">login</span>
             sign in
         </button>

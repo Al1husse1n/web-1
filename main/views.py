@@ -50,7 +50,7 @@ def authentication(request):
             user.save()
             return JsonResponse({"message":"sign up successful"}, status=200)
     except ValidationError as e:
-        return JsonResponse({"errors": f"{e.message_dict}"}, status=400)
+        return JsonResponse({"errors": e.message_dict}, status=400)
     except IntegrityError as e:
         return JsonResponse({"error":e}, status=400)
     except Exception as e:

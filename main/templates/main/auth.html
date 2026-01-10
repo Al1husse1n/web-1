@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'main/auth.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <title>Login / Register</title>
+</head>
+<body>
+
+<div class="auth-container">
+
+    <!-- REGISTER -->
+    <div class="auth-box">
+        <h2>
+            <span class="material-symbols-outlined">person_add</span>
+            register
+        </h2>
+
+        <div class="field">
+            <input type="text" placeholder="username">
+            <p class="error">invalid username</p>
+        </div>
+
+        <div class="field">
+            <input type="email" placeholder="email">
+        </div>
+
+        <div class="field">
+            <input type="password" placeholder="password">
+            <p class="error">invalid password</p>
+        </div>
+
+        <div class="field">
+            <input type="password" placeholder="verify password">
+            <p class="error">passwords do not match</p>
+        </div>
+
+        <button class="primary-btn">
+            <span class="material-symbols-outlined">person_add</span>
+            sign up
+        </button>
+    </div>
+
+    <!-- LOGIN -->
+    <div class="auth-box">
+        <h2>
+            <span class="material-symbols-outlined">login</span>
+            login
+        </h2>
+
+        <div class="field">
+            <input type="email" placeholder="email">
+            <p class="error">user not found</p>
+        </div>
+
+        <div class="field">
+            <input type="password" placeholder="password">
+        </div>
+
+        <button class="primary-btn">
+            <span class="material-symbols-outlined">login</span>
+            sign in
+        </button>
+    </div>
+
+</div>
+<script src="{% static 'main/auth.js' %}"></script>
+</body>
+</html>

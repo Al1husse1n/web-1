@@ -13,4 +13,5 @@ urlpatterns = [
     path('statistics/', views.statistics, name='statistics'),
     path('authenticate/' ,views.authentication, name='autnenticate'),
     path('', RedirectView.as_view(url='/leaderboards/', permanent=True)),
+    path('logout/', views.logout_view, name='logout'),
 ]         

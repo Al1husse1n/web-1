@@ -61,3 +61,7 @@ def profile(request):
     pass
 def statistics(request):
     pass
+
+def logout_view(request):
+    logout(request)
+    return redirect('auth')

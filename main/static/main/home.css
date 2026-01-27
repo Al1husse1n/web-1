@@ -10,7 +10,7 @@ html, body {
 
 body {
   margin: 0;
-  background: #2c2f33;
+  background: #323437;
   color: #bfbfbf;
 }
 
@@ -23,6 +23,10 @@ body {
   margin-left: 100px;
   margin-top: 30px;
 
+}
+.icon a{
+  text-decoration: none;
+  color: #bfbfbf;
 }
 
 @media (max-width: 768px) {

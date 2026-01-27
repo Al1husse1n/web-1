@@ -5,12 +5,13 @@
   <meta charset="UTF-8" />
   <title>Monkeytype Clone</title>
   <link rel="stylesheet" href="{% static 'main/home.css' %}" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
 </head>
 <body>
 
  <nav class="topbar">
   <div class="left">
-    <img src="monkey.jpg" alt="logo" class="logo-img" />
+    <img src="{%static 'main/monkey.jpg'%}" alt="logo" class="logo-img" />
 
     <div class="logo-text">
       <span class="small">monkey see</span>
@@ -18,14 +19,33 @@
     </div>
 
     <!-- icons now live here -->
-    <span class="icon">⌨</span>
-    <span class="icon">👑</span>
-    <span class="icon">ℹ</span>
-    <span class="icon">⚙</span>
+    <span class="icon"><a href="" title="start test">
+      <span class="material-symbols-outlined" id="keyboard-icon">
+        keyboard
+      </span>
+    </a></span>
+    <span class="icon"><a href="{% url 'leaderboards'%}" title="leaderboards">
+      <span class="material-symbols-outlined">
+          crown
+      </span>
+    </a></span>
+    <span class="icon"><a href="https://monkeytype.com/about" title="about">
+      <span class="material-symbols-outlined">
+        info_i
+      </span>
+    </a></span>
   </div>
   <div class="top-right">
-  <button class="nav-icon" id="notifBtn">🔔</button>
-  <button class="nav-icon" id="loginBtn">👤</button>
+  <a href="#" title="profile" class="icon">
+    <span class="material-symbols-outlined">
+      account_box
+    </span>
+  </a>
+  <a href="{%url 'logout'%}"class="icon" id="logout" title="logout"> 
+    <span class="material-symbols-outlined">
+          logout
+      </span>
+  </a>
 
   <!-- Notification dropdown -->
   <div class="dropdown hidden" id="notifMenu">
@@ -60,7 +80,10 @@
 
   <div class="language-wrapper">
   <button id="languageBtn" class="language-btn">
-    🌐 <span id="currentLanguage">english</span>
+    <span class="material-symbols-outlined">
+      language
+    </span>
+    <span id="currentLanguage">english</span>
   </button>
 
   <div id="languageMenu" class="language-menu hidden">
@@ -76,7 +99,10 @@
 
   <div class="language-wrapper" style="margin-top:8px;">
   <button id="categoryBtn" class="language-btn">
-    🗂 <span id="currentCategory">All categories</span>
+    <span class="material-symbols-outlined">
+      category
+    </span>
+    <span id="currentCategory">All categories</span>
   </button>
 
   <div id="categoryMenu" class="language-menu hidden">
@@ -98,7 +124,11 @@
   </div>
 
   <div class="restart">
-    <button id="restartBtn">↻ Restart</button>
+    <button id="restartBtn">
+      <span class="material-symbols-outlined">
+        replay
+      </span>
+    </button>
   </div>
 
   <div class="spacer"></div>

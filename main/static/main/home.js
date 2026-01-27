@@ -16,26 +16,58 @@ let selectedTime = 15; // seconds
 let remainingTime = selectedTime;
 let timerInterval = null;
 
-async function fetchRandomWords() {
+async function fetchRandomWords({language= "en", category= null} = {}) {
+  // show loading state while fetching
+  loadText("Loading...");
+  textInput.value = "";
+  textInput.disabled = true;
   try {
-    const res = await fetch(
-      "https://random-words-api.kushcreates.com/api?language=en&length=5&words=30"
+    let res;
+    if(language === "en" && category === null){
+      res = await fetch(
+      "/statement/"
     );
+    }
+    else if(language === "en"){
+      res = await fetch(
+      `/statement/?category=${category}`
+      );
+    }
+    else if(category === null){
+      res = await fetch(
+      `/statement/?language=${language}`
+      );
+    }
+    else if(language === null){
+      alert("choose a valid language");
+      return;
+    }
     const data = await res.json();
-
-    // API returns array of objects → extract word
-    words = data.map(item => item.word).join(" ");
-
-    loadText();
+    if(res.status===400){
+      alert(data.error);
+      console.error(data.error);
+    }
+    else if(res.status===500){
+      alert("Something went wrong");
+      console.error(data.error)
+    }
+    else{
+      loadText(data.statement);
+    }
   } catch (err) {
+    alert("Something went wrong");
     console.error("Failed to fetch words", err);
   }
+    finally {
+      // ensure input is enabled after fetch attempt
+      textInput.disabled = false;
+    }
 }
 
 /* LOAD WORDS INTO BACKGROUND */
-function loadText() {
+function loadText(statement) {
   textDisplay.innerHTML = "";
-  words.split("").forEach(char => {
+  statement.split("").forEach(char => {
     const span = document.createElement("span");
     span.innerText = char;
     textDisplay.appendChild(span);
@@ -48,6 +80,8 @@ textInput.addEventListener("input", () => {
     startTime = new Date();
     // start countdown when user begins typing
     startTimer();
+    // enter minimal mode: hide UI except timer and statement
+    document.body.classList.add('minimal-mode');
   }
 
   const chars = textDisplay.querySelectorAll("span");
@@ -67,7 +101,8 @@ textInput.addEventListener("input", () => {
 
   if (input.length >= chars.length && !finished) {
     finished = true;
-    endTest();
+    // user finished before timer; mark finished but keep UI hidden until timer ends
+    endTest(false);
   }
 });
 
@@ -140,7 +175,6 @@ document.addEventListener("keydown", (e) => {
 
   if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "p") {
     e.preventDefault();
-    openCommandLine();
   }
 });
 
@@ -155,6 +189,8 @@ function restartTest() {
   accuracyEl.innerText = 0;
   remainingTime = selectedTime;
   timeLeftEl.innerText = remainingTime;
+  // exit minimal mode on manual restart
+  document.body.classList.remove('minimal-mode');
   fetchRandomWords();
   textInput.focus();
 }
@@ -167,7 +203,8 @@ function startTimer() {
     remainingTime -= 1;
     timeLeftEl.innerText = remainingTime;
     if (remainingTime <= 0) {
-      endTest();
+      // timer reached zero — end test and exit minimal mode
+      endTest(true);
     }
   }, 1000);
 }
@@ -179,19 +216,19 @@ function stopTimer() {
   }
 }
 
-function endTest() {
+function endTest(byTimer = false) {
   stopTimer();
   finished = true;
   textInput.disabled = true;
   calculateResults();
+  if (byTimer) {
+    // timer finished — reveal UI again
+    document.body.classList.remove('minimal-mode');
+  }
 }
 
-function openCommandLine() {
-  alert("Command line opened (feature coming soon 👀)");
-}
 
-const languages = [ "english", "french", "spanish","german","italian","portuguese", "arabic", "amharic", "swahili", "hindi", "chinese", "japanese", "korean","russian", "turkish"
-];
+const languages = { "English":"en", "French":"fr", "Spanish":"es", "german":"de", "italian":'it', "brazilian portuguese": "pt-br", "hindi": "hi", "chinese":"zh"};
 
 const languageBtn = document.getElementById("languageBtn");
 const languageMenu = document.getElementById("languageMenu");
@@ -200,7 +237,7 @@ const languageSearch = document.getElementById("languageSearch");
 const currentLanguage = document.getElementById("currentLanguage");
 
 // Categories (UI mirrors languages dropdown)
-const categories = ["All categories", "Wordle", "countries", "brainrot", "Sports", "animals", "Softwares", "Games"];
+const categories = {"All categories":null, "Wordle":"wordle", "Countries":"countries", "Brainrot":"brainrot", "Sports":"sports", "Animals":"animals", "Softwares":"softwares", "Games":"games"};
 const categoryBtn = document.getElementById("categoryBtn");
 const categoryMenu = document.getElementById("categoryMenu");
 const categoryList = document.getElementById("categoryList");
@@ -209,8 +246,8 @@ const currentCategory = document.getElementById("currentCategory");
 
 function renderLanguages(filter = "") {
   languageList.innerHTML = "";
-  languages
-    .filter(lang => lang.includes(filter.toLowerCase()))
+  Object.keys(languages)
+    .filter(lang => lang.toLowerCase().includes(filter.toLowerCase()))
     .forEach(lang => {
       const div = document.createElement("div");
       div.className = "language-item";
@@ -218,6 +255,8 @@ function renderLanguages(filter = "") {
       div.onclick = () => {
         currentLanguage.textContent = lang;
         languageMenu.classList.add("hidden");
+        cat = categories[currentCategory.textContent];
+        fetchRandomWords({language: languages[lang], category: cat})
       };
       languageList.appendChild(div);
     });
@@ -225,7 +264,7 @@ function renderLanguages(filter = "") {
 
 function renderCategories(filter = "") {
   categoryList.innerHTML = "";
-  categories
+  Object.keys(categories)
     .filter(cat => cat.toLowerCase().includes(filter.toLowerCase()))
     .forEach(cat => {
       const div = document.createElement("div");
@@ -234,12 +273,26 @@ function renderCategories(filter = "") {
       div.onclick = () => {
         currentCategory.textContent = cat;
         categoryMenu.classList.add("hidden");
+        const catCode = categories[cat];
+        if (cat !== "All categories") {
+          // force English and disable language selection when a specific category is chosen
+          currentLanguage.textContent = "English";
+          languageBtn.disabled = true;
+          languageMenu.classList.add("hidden");
+          fetchRandomWords({language: languages["English"], category: catCode});
+        } else {
+          // re-enable language selection for "All categories"
+          languageBtn.disabled = false;
+          const lang = languages[currentLanguage.textContent] || 'en';
+          fetchRandomWords({language: lang, category: catCode});
+        }
       };
       categoryList.appendChild(div);
     });
 }
 
 languageBtn.onclick = () => {
+  if (languageBtn.disabled) return;
   languageMenu.classList.toggle("hidden");
   languageSearch.value = "";
   renderLanguages();

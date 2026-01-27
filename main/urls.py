@@ -12,6 +12,7 @@ urlpatterns = [
     path('leaderboards/', views.leaderboards, name='leaderboards'),
     path('statistics/', views.statistics, name='statistics'),
     path('authenticate/' ,views.authentication, name='autnenticate'),
-    path('', RedirectView.as_view(url='/leaderboards/', permanent=True)),
+    path('', RedirectView.as_view(url='/home/', permanent=True)),
     path('logout/', views.logout_view, name='logout'),
+    path('statement/', views.statement, name="statement")
 ]         

@@ -6,6 +6,7 @@ from django.http import JsonResponse
 import json
 from django.core.exceptions import ValidationError
 from django.db import IntegrityError
+from .random_api import param
 
 def leaderboards(request):
     time = request.GET.get('time')
@@ -20,7 +21,7 @@ def leaderboards(request):
     return render(request, 'main/leaderboards.html',{"scores":scores})
 
 def home(request):
-    pass
+    return render(request, 'main/home.html')
 
 def auth(request):
     return render(request, 'main/auth.html')
@@ -56,12 +57,30 @@ def authentication(request):
     except Exception as e:
         return JsonResponse({"error": e}, status=500)
     
-
 def profile(request):
-    pass
+    pass    
 def statistics(request):
-    pass
+    pass                
 
 def logout_view(request):
     logout(request)
     return redirect('auth')
+
+def statement(request):
+    if request.method != "GET":
+        return JsonResponse({"error": "only get requests are allowed"}, status=400)
+    try:
+        language = request.GET.get("language")
+        category = request.GET.get("category")
+        if language == None and category == None:
+            statement = param()
+        elif language == None:
+            statement = param(category=category)
+        elif category == None:
+            statement = param(language=language)
+        print(language, category)
+        print(statement)
+        return JsonResponse({"statement": statement}, status=200)
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=500)
+

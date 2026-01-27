@@ -1,0 +1,142 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Monkeytype Clone</title>
+  <link rel="stylesheet" href="{% static 'main/home.css' %}" />
+</head>
+<body>
+
+ <nav class="topbar">
+  <div class="left">
+    <img src="monkey.jpg" alt="logo" class="logo-img" />
+
+    <div class="logo-text">
+      <span class="small">monkey see</span>
+      <span class="big">monkeytype</span>
+    </div>
+
+    <!-- icons now live here -->
+    <span class="icon">⌨</span>
+    <span class="icon">👑</span>
+    <span class="icon">ℹ</span>
+    <span class="icon">⚙</span>
+  </div>
+  <div class="top-right">
+  <button class="nav-icon" id="notifBtn">🔔</button>
+  <button class="nav-icon" id="loginBtn">👤</button>
+
+  <!-- Notification dropdown -->
+  <div class="dropdown hidden" id="notifMenu">
+    <p class="dropdown-title">notifications</p>
+    <p class="dropdown-item muted">no notifications</p>
+  </div>
+
+  <!-- Login dropdown -->
+  <div class="dropdown hidden" id="loginMenu">
+    <p class="dropdown-title">account</p>
+    <p class="dropdown-item">login</p>
+    <p class="dropdown-item">sign up</p>
+  </div>
+</div>
+
+</nav>
+
+
+  <div class="mode-bar">
+    <button class="active">time</button>
+    <span class="divider">|</span>
+    <button class="active time-btn" id="time15">15</button>
+    <button class="time-btn" id="time30">30</button>
+    <button class="time-btn" id="time60">60</button>
+  </div>
+
+  <div class="mode-status" style="display:flex;justify-content:center;gap:18px;margin-bottom:6px;color:#ddd;font-size:14px;">
+    <div>time left: <span id="time-left">15</span>s</div>
+    <div>wpm: <span id="wpm">0</span></div>
+    <div>accuracy: <span id="accuracy">0</span>%</div>
+  </div>
+
+  <div class="language-wrapper">
+  <button id="languageBtn" class="language-btn">
+    🌐 <span id="currentLanguage">english</span>
+  </button>
+
+  <div id="languageMenu" class="language-menu hidden">
+    <input
+      type="text"
+      id="languageSearch"
+      placeholder="search language..."
+    />
+    <div id="languageList" class="language-list"></div>
+  </div>
+</div>
+
+
+  <div class="language-wrapper" style="margin-top:8px;">
+  <button id="categoryBtn" class="language-btn">
+    🗂 <span id="currentCategory">All categories</span>
+  </button>
+
+  <div id="categoryMenu" class="language-menu hidden">
+    <input
+      type="text"
+      id="categorySearch"
+      placeholder="search category..."
+    />
+    <div id="categoryList" class="language-list"></div>
+  </div>
+</div>
+
+
+  <div class="container">
+
+  <div class="typing-wrapper">
+    <div id="text-display"></div>
+    <textarea id="text-input" autocomplete="off"></textarea>
+  </div>
+
+  <div class="restart">
+    <button id="restartBtn">↻ Restart</button>
+  </div>
+
+  <div class="spacer"></div>
+
+  <div class="hint">
+    <div class="hint-row">
+      <span class="key">tab</span>
+      <span class="plus">+</span>
+      <span class="key">enter</span>
+      <span class="text">restart test</span>
+    </div>
+
+    <div class="hint-row">
+      <span class="key">esc</span>
+      <span class="text">or</span>
+      <span class="key">ctrl</span>
+      <span class="plus">+</span>
+      <span class="key">shift</span>
+      <span class="plus">+</span>
+      <span class="key">p</span>
+      <span class="text">command line</span>
+    </div>
+  </div>
+
+  
+  <div class="footer">
+    <a href="https://github.com/monkeytypegame/monkeytype" target="_blank">GitHub</a>
+    <a href="https://discord.com/invite/monkeytype" target="_blank">Discord</a>
+    <a href="https://x.com/monkeytype" target="_blank">Twitter</a>
+    <a href="https://monkeytype.com/terms-of-service" target="_blank">Terms</a>
+    <a href="https://monkeytype.com/security-policy" target="_blank">Security</a>
+    <a href="https://monkeytype.com/privacy-policy" target="_blank">Privacy</a>
+  </div>
+
+</div>
+
+ 
+
+  <script src="{% static 'main/home.css' %}"></script>
+</body>
+</html>

@@ -275,6 +275,18 @@ body {
   color: #facc15; /* monkey yellow */
 }
 
+/* disabled state for language selector */
+.language-btn:disabled,
+.language-btn[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  color: #666;
+}
+
+.language-btn:disabled:hover {
+  color: #666;
+}
+
 /* dropdown */
 .language-menu {
   position: absolute;
@@ -389,6 +401,24 @@ body {
   color: #666;
   cursor: default;
 }
+
+/* Minimal mode: hide most UI while typing until timer ends */
+body.minimal-mode nav.topbar,
+body.minimal-mode .mode-bar,
+body.minimal-mode .language-wrapper,
+body.minimal-mode .restart,
+body.minimal-mode .hint,
+body.minimal-mode .footer,
+body.minimal-mode .top-right {
+  display: none !important;
+}
+
+/* Keep only the time-left visible inside .mode-status */
+body.minimal-mode .mode-status > div:nth-child(2),
+body.minimal-mode .mode-status > div:nth-child(3) {
+  display: none !important;
+}
+
 
 
 

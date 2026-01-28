@@ -1,0 +1,188 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #323437;
+  color: #e2b714;
+  font-family: monospace;
+}
+
+/* TOP BAR */
+.topbar {
+  height: 55px;
+  background: #2c2e31;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 20px;
+}
+
+.logo .name {
+  color: #e2b714;
+  font-weight: bold;
+}
+
+/* MAIN */
+.container {
+  max-width: 700px;
+  margin: 60px auto;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#text-display {
+  color: #9e9e9e;
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+textarea {
+  width: 100%;
+  height: 90px;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  font-size: 18px;
+  resize: none;
+}
+
+/* STATS */
+.stats-grid {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px 40px;
+  width: 100%;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat.big span:last-child {
+  font-size: 12px;
+}
+
+.label {
+  color: #777;
+  font-size: 13px;
+}
+
+/* ACTIONS */
+.actions {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+}
+
+.actions button {
+  background: none;
+  border: none;
+  color: #777;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+.actions button:hover {
+  color: #e2b714;
+}
+
+/* BIG STATS */
+.big-stats {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.big {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.big .label {
+  color: #777;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.big .value {
+  font-size: 40px;
+  line-height: 1;
+  font-weight: 600;
+  color: #e2b714;
+  /* Use a regular, neutral sans-serif for stat values */
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-style: normal;
+  letter-spacing: 1px;
+}
+
+.stat .label {
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.stat span:nth-child(2) {
+  font-size: 6px;
+  color: #e2b714;
+  font-weight: 600;
+  /* Use the same neutral sans-serif and normal style */
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-style: normal;
+}
+
+/* Explicit rules for JS-updated stat IDs (higher specificity) */
+/* Force very large sizes for the two main stats */
+#wpm, #acc {
+  display: block;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+  font-style: normal !important;
+  color: #e2b714 !important;
+  font-size: 40px !important;
+  line-height: 1 !important;
+  font-weight: 700 !important;
+  margin: 6px 0 !important;
+}
+
+/* Larger sizes for secondary stats */
+#testType, #raw, #characters, #consistency, #time, #other {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+  font-style: normal !important;
+  color: #e2b714 !important;
+  font-size: 9px !important;
+  font-weight: 600 !important;
+  margin-top: 6px !important;
+}
+
+@media (min-width: 900px) {
+  .big .value { font-size: 55px; }
+  .stat span:nth-child(2) { font-size: 10px; }
+  #wpm, #acc { font-size: 55px !important; }
+  #testType, #raw, #characters, #consistency, #time, #other { font-size: 10px !important; }
+  .stats-grid { grid-template-columns: repeat(3, 1fr); gap: 28px 48px; }
+}
+
+@media (max-width: 420px) {
+  .big .value { font-size: 18px; }
+  .stat span:nth-child(2) { font-size: 5px; }
+  #wpm, #acc { font-size: 18px !important; }
+  #testType, #raw, #characters, #consistency, #time, #other { font-size: 5px !important; }
+  .container { margin: 30px 12px; }
+}

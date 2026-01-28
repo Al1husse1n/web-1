@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Monkeytype Result</title>
+  <link rel="stylesheet" href="{% static 'main/stat.css'%}">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="logo">
+    <span class="icon">⌨</span>
+    <span class="name">monkeytype</span>
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- BIG STATS -->
+  <div class="big-stats">
+    <div class="big">
+      <span class="label">wpm</span>
+      <span id="wpm" class="value">–</span>
+    </div>
+    <div class="big">
+      <span class="label">acc</span>
+      <span id="acc" class="value">–</span>
+    </div>
+  </div>
+
+  <!-- SMALL STATS -->
+  <div class="stats-grid">
+    <div class="stat">
+      <span class="label">test type</span>
+      <span id="testType">–</span>
+    </div>
+    <div class="stat">
+      <span class="label">raw</span>
+      <span id="raw">–</span>
+    </div>
+    <div class="stat">
+      <span class="label">characters</span>
+      <span id="characters">–</span>
+    </div>
+    <div class="stat">
+      <span class="label">consistency</span>
+      <span id="consistency">–</span>
+    </div>
+    <div class="stat">
+      <span class="label">time</span>
+      <span id="time">–</span>
+    </div>
+    <div class="stat">
+      <span class="label">other</span>
+      <span id="other">–</span>
+    </div>
+  </div>
+
+  <!-- ACTIONS -->
+  <div class="actions">
+    <button id="retake" title="retake test">↻</button>
+    <button id="next" title="next test">➜</button>
+  </div>
+
+</main>
+
+<script src="{% static 'main/stat.js'%}"></script>
+</body>
+</html>

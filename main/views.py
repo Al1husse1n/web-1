@@ -60,7 +60,7 @@ def authentication(request):
 def profile(request):
     pass    
 def statistics(request):
-    pass                
+    return render(request, "main/stat.html")                
 
 def logout_view(request):
     logout(request)

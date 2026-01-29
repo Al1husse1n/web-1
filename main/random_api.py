@@ -10,10 +10,10 @@ def param(language="en", category=None):
     url = "https://random-words-api.kushcreates.com/api"
     params = {
             "language": language,
-            'words': 30
+            'words': 60
         }
     if language == "en" and category is None:
-        for _ in range(30):
+        for _ in range(60):
             statement += random.choice(words) + " "
         return statement
     elif category is not None:
@@ -25,4 +25,3 @@ def param(language="en", category=None):
         statement+=word.get("word") + " "
     return statement
 
-print(param(language='it'))

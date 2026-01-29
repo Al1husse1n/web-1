@@ -4,17 +4,45 @@
 <head>
   <meta charset="UTF-8">
   <title>Monkeytype Result</title>
-  <link rel="stylesheet" href="{% static 'main/stat.css'%}">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+  <link rel="stylesheet" href="{%static 'main/stat.css'%}">
 </head>
 <body>
 
+<!-- TOP BAR -->
 <header class="topbar">
   <div class="logo">
-    <span class="icon">⌨</span>
+    <span class="icon"><img src="{% static 'main/monkey.jpg' %}" alt="monkeytype icon"></span>
     <span class="name">monkeytype</span>
+  </div>
+
+  <div class="top-icons">
+    <a title="leaderboard" href="{% url 'leaderboards'%}">
+      <span class="material-symbols-outlined">
+          crown
+      </span>
+    </a>
+    <a title="about" href="https://monkeytype.com/about">
+      <span class="material-symbols-outlined">
+        info_i
+      </span>
+    </a>
+    <a title="profile" href="#">
+      <span class="material-symbols-outlined">
+      account_box
+      </span>
+    </a>
+    <a title="logout" href="{%url 'logout'%}">
+      <span class="material-symbols-outlined">
+          logout
+      </span>
+    </a>
+
   </div>
 </header>
 
+<!-- MAIN CONTENT -->
 <main class="container">
 
   <!-- BIG STATS -->
@@ -35,22 +63,27 @@
       <span class="label">test type</span>
       <span id="testType">–</span>
     </div>
+
     <div class="stat">
       <span class="label">raw</span>
       <span id="raw">–</span>
     </div>
+
     <div class="stat">
       <span class="label">characters</span>
       <span id="characters">–</span>
     </div>
+
     <div class="stat">
       <span class="label">consistency</span>
       <span id="consistency">–</span>
     </div>
+
     <div class="stat">
       <span class="label">time</span>
       <span id="time">–</span>
     </div>
+
     <div class="stat">
       <span class="label">other</span>
       <span id="other">–</span>
@@ -65,6 +98,6 @@
 
 </main>
 
-<script src="{% static 'main/stat.js'%}"></script>
+<script src="{%static 'main/stat.js'%}"></script>
 </body>
 </html>

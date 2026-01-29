@@ -1,8 +1,8 @@
-// SAMPLE RESULT DATA (mock) — replace with DB values later
-const sampleResult = {
-  wpm: 125,
-  accuracy: 96,
-  raw: 128,
+// Sample result data (mock)
+const result = {
+  wpm: 82,
+  accuracy: 97,
+  raw: 86,
   characters: "321 / 5 / 0 / 0",
   consistency: 89,
   time: "30s",
@@ -10,29 +10,21 @@ const sampleResult = {
   other: "valid"
 };
 
-function populateStats(result) {
-  const set = (id, value) => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    el.textContent = value;
-  };
+// Inject data into UI
+document.getElementById("wpm").textContent = result.wpm;
+document.getElementById("acc").textContent = result.accuracy + "%";
+document.getElementById("raw").textContent = result.raw;
+document.getElementById("characters").textContent = result.characters;
+document.getElementById("consistency").textContent = result.consistency + "%";
+document.getElementById("time").textContent = result.time;
+document.getElementById("testType").textContent = result.testType;
+document.getElementById("other").textContent = result.other;
 
-  set('wpm', result.wpm);
-  set('acc', result.accuracy + '%');
-  set('raw', result.raw);
-  set('characters', result.characters);
-  set('consistency', result.consistency + '%');
-  set('time', result.time);
-  set('testType', result.testType);
-  set('other', result.other);
-}
+// Buttons (placeholder behavior)
+document.getElementById("retake").onclick = () => {
+  alert("Retake test");
+};
 
-document.addEventListener('DOMContentLoaded', () => {
-  populateStats(sampleResult);
-
-  // Buttons (placeholders)
-  const retake = document.getElementById('retake');
-  const next = document.getElementById('next');
-  if (retake) retake.onclick = () => { alert('Retake test'); };
-  if (next) next.onclick = () => { alert('Next test'); };
-});
+document.getElementById("next").onclick = () => {
+  alert("Next test");
+};

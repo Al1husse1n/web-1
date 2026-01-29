@@ -121,6 +121,7 @@ function setSelectedTime(seconds, btn) {
   // update active class
   document.querySelectorAll('.time-btn').forEach(b => b.classList.remove('active'));
   if (btn) btn.classList.add('active');
+  
 }
 
 time15Btn.onclick = () => setSelectedTime(15, time15Btn);
@@ -134,24 +135,98 @@ function calculateResults() {
   if (!startTime) return;
   const now = new Date();
   const timeTakenSeconds = Math.max((now - startTime) / 1000, 1);
-  const charsTyped = textInput.value.length;
-  const wordsTyped = charsTyped / 5;
   const minutes = timeTakenSeconds / 60;
-  const wpm = Math.round(wordsTyped / minutes) || 0;
 
-  // accuracy based on character-by-character comparison
+  // character-level correctness (for accuracy)
   const chars = textDisplay.querySelectorAll('span');
   const input = textInput.value.split('');
-  let correct = 0;
+  let correctChars = 0;
   chars.forEach((char, i) => {
-    if (input[i] != null && input[i] === char.innerText) correct++;
+    if (input[i] != null && input[i] === char.innerText) correctChars++;
   });
-  const total = chars.length || 1;
-  const accuracy = Math.max(0, Math.round((correct / total) * 100));
+  const totalTyped = input.length;
+  const accuracy = totalTyped === 0 ? 0 : Math.max(0, Math.round((correctChars / totalTyped) * 100));
+
+  // word-level correctness (for WPM and incorrectWords)
+  const originalText = Array.from(chars).map(c => c.innerText).join('').trim();
+  const originalWords = originalText ? originalText.split(/\s+/) : [];
+  const inputText = textInput.value.trim();
+  const inputWords = inputText ? inputText.split(/\s+/) : [];
+
+  let correctWords = 0;
+  let incorrectWords = 0;
+  inputWords.forEach((w, i) => {
+    if (originalWords[i] && w === originalWords[i]) correctWords++;
+    else incorrectWords++;
+  });
+
+  const wpm = minutes > 0 ? Math.round(correctWords / minutes) : 0;
 
   wpmEl.innerText = wpm;
   accuracyEl.innerText = accuracy;
+
+  postStats(
+    wpm,
+    accuracy,
+    originalText,
+    correctWords,
+    incorrectWords,
+    timeTakenSeconds,
+    currentCategory.textContent,
+    currentLanguage.textContent
+  );
 }
+
+
+
+async function postStats(wpm, accuracy, statement, correct_words, incorrect_words, time, category, language) {
+  try {
+    let res = await fetch('/statistics/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        "wpm": wpm,
+        "accuracy": accuracy,
+        "statement": statement,
+        "correct_words":correct_words,
+        "incorrect_words":incorrect_words,
+        "time":time,
+        "category":category,
+        "language":language
+      })
+    });
+    let data = await res.json();
+    if(data.errors){
+      let errors = data.errors; 
+      alert(Object.values(errors)[0]);
+    }
+    else if(res.status === 400){
+      alert(data.error);
+    }
+    else if(res.status === 500){
+      alert("something wrong happened");
+      console.log(data.error);
+    }
+    else if(res.status === 200){
+      const params = new URLSearchParams({
+        wpm: wpm,
+        accuracy: accuracy,
+        statement_length: statement.length,
+        correct_words:correct_words,
+        incorrect_words:incorrect_words,
+        time:time,
+        category:category,
+        language:language  
+      });
+      window.location.href = "/stat/?" + params.toString();
+    }
+
+  } catch (err) {
+    console.error('postStats error:', err);
+  }
+}
+
+
 
 
 let tabPressed = false;
@@ -236,7 +311,6 @@ const languageList = document.getElementById("languageList");
 const languageSearch = document.getElementById("languageSearch");
 const currentLanguage = document.getElementById("currentLanguage");
 
-// Categories (UI mirrors languages dropdown)
 const categories = {"All categories":null, "Wordle":"wordle", "Countries":"countries", "Brainrot":"brainrot", "Sports":"sports", "Animals":"animals", "Softwares":"softwares", "Games":"games"};
 const categoryBtn = document.getElementById("categoryBtn");
 const categoryMenu = document.getElementById("categoryMenu");
@@ -255,7 +329,7 @@ function renderLanguages(filter = "") {
       div.onclick = () => {
         currentLanguage.textContent = lang;
         languageMenu.classList.add("hidden");
-        cat = categories[currentCategory.textContent];
+        const cat = categories[currentCategory.textContent];
         fetchRandomWords({language: languages[lang], category: cat})
       };
       languageList.appendChild(div);
@@ -328,25 +402,4 @@ document.addEventListener("click", (e) => {
 renderLanguages();
 renderCategories();
 
-const notifBtn = document.getElementById("notifBtn");
-const loginBtn = document.getElementById("loginBtn");
-const notifMenu = document.getElementById("notifMenu");
-const loginMenu = document.getElementById("loginMenu");
 
-notifBtn.onclick = (e) => {
-  e.stopPropagation();
-  notifMenu.classList.toggle("hidden");
-  loginMenu.classList.add("hidden");
-};
-
-loginBtn.onclick = (e) => {
-  e.stopPropagation();
-  loginMenu.classList.toggle("hidden");
-  notifMenu.classList.add("hidden");
-};
-
-// close when clicking outside
-document.addEventListener("click", () => {
-  notifMenu.classList.add("hidden");
-  loginMenu.classList.add("hidden");
-});

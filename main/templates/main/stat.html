@@ -9,8 +9,7 @@
   <link rel="stylesheet" href="{%static 'main/stat.css'%}">
 </head>
 <body>
-
-<!-- TOP BAR -->
+{% block body %}
 <header class="topbar">
   <div class="logo">
     <span class="icon"><img src="{% static 'main/monkey.jpg' %}" alt="monkeytype icon"></span>
@@ -49,11 +48,11 @@
   <div class="big-stats">
     <div class="big">
       <span class="label">wpm</span>
-      <span id="wpm" class="value">–</span>
+      <span id="wpm" class="value">{{wpm}}</span>
     </div>
     <div class="big">
       <span class="label">acc</span>
-      <span id="acc" class="value">–</span>
+      <span id="acc" class="value">{{accuracy}}%</span>
     </div>
   </div>
 
@@ -61,43 +60,43 @@
   <div class="stats-grid">
     <div class="stat">
       <span class="label">test type</span>
-      <span id="testType">–</span>
+      <span id="testType">{{category}} . {{language}}</span>
     </div>
 
     <div class="stat">
-      <span class="label">raw</span>
-      <span id="raw">–</span>
+      <span class="label">correct words</span>
+      <span id="correct-words">{{correct_words}}</span>
     </div>
 
     <div class="stat">
       <span class="label">characters</span>
-      <span id="characters">–</span>
+      <span id="characters">{{characters}}</span>
     </div>
 
     <div class="stat">
-      <span class="label">consistency</span>
-      <span id="consistency">–</span>
+      <span class="label">incorrect words</span>
+      <span id="incorrect_words">{{incorrect_words}}</span>
     </div>
 
     <div class="stat">
       <span class="label">time</span>
-      <span id="time">–</span>
+      <span id="time">{{time}}s</span>
     </div>
 
     <div class="stat">
       <span class="label">other</span>
-      <span id="other">–</span>
+      <span id="other">valid</span>
     </div>
   </div>
 
-  <!-- ACTIONS -->
+  
   <div class="actions">
-    <button id="retake" title="retake test">↻</button>
     <button id="next" title="next test">➜</button>
   </div>
 
 </main>
 
 <script src="{%static 'main/stat.js'%}"></script>
+{% endblock %}
 </body>
 </html>

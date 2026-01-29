@@ -41,7 +41,7 @@ signIn.addEventListener('click', ()=>{
                     console.error(parsedResponse.error);
                 }
                 else if(parsedResponse.message){
-                    window.location.href = '/leaderboards/';
+                    window.location.href = '/home/';
                 }
             })
         })
@@ -94,7 +94,7 @@ signUp.addEventListener('click', ()=>{
                 }
                 else if(parsedResponse.message){
                     console.log(parsedResponse.message);
-                    window.location.href = '/leaderboards/';
+                    window.location.href = '/home/';
                 }
             })
         })

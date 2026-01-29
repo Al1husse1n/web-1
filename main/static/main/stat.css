@@ -45,7 +45,9 @@ body {
   align-items: center;
   justify-content: center;
   margin-right: 6px;
-
+  background: #e2b714; /* monkey yellow */
+  padding: 4px;
+  border-radius: 6px;
 }
 
 .icon img {
@@ -53,6 +55,10 @@ body {
   width: auto;
   vertical-align: middle;
   opacity: 0.85;         /* subtle, not too loud */
+}
+
+.logo .name {
+  color: #e2b714;
 }
 
 /* MAIN */

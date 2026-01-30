@@ -52,6 +52,9 @@ def authentication(request):
             user.set_password(password)
             user.full_clean()
             user.save()
+            user = authenticate(request, username=username, password=password)
+            if user:
+                login(request, user)
             return JsonResponse({"message":"sign up successful"}, status=200)
     except ValidationError as e:
         return JsonResponse({"errors": e.message_dict}, status=400)
